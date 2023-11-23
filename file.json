@@ -1,0 +1,227 @@
+[
+  {
+    "_id": "6557b3d6e5bc5b81f55411e9",
+    "index": 0,
+    "guid": "546e7649-bdc2-4b6c-b349-d40c1f0eb508",
+    "isActive": true,
+    "balance": "$2,690.93",
+    "picture": "http://placehold.it/32x32",
+    "age": 25,
+    "eyeColor": "brown",
+    "name": "Ware Anderson",
+    "gender": "male",
+    "company": "OZEAN",
+    "email": "wareanderson@ozean.com",
+    "phone": "+1 (945) 512-3877",
+    "address": "467 Landis Court, Waikele, Minnesota, 4113",
+    "about": "Ullamco ullamco Lorem enim dolore sunt consectetur proident cupidatat Lorem dolor. Pariatur voluptate et laborum nisi officia non laborum nostrud consectetur pariatur labore esse. Excepteur ipsum dolor consequat dolore eiusmod. Reprehenderit Lorem id aliquip occaecat minim deserunt ut velit tempor tempor excepteur. Occaecat in incididunt enim nisi voluptate exercitation ipsum cupidatat sint officia incididunt nulla fugiat tempor.\r\n",
+    "registered": "2017-10-28T07:06:16 +02:00",
+    "latitude": -87.748994,
+    "longitude": -115.585043,
+    "tags": [
+      "amet",
+      "proident",
+      "quis",
+      "labore",
+      "nulla",
+      "nisi",
+      "esse"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Rosemarie Rodgers"
+      },
+      {
+        "id": 1,
+        "name": "Sheila Mckinney"
+      },
+      {
+        "id": 2,
+        "name": "Copeland Berger"
+      }
+    ],
+    "greeting": "Hello, Ware Anderson! You have 7 unread messages.",
+    "favoriteFruit": "apple"
+  },
+  {
+    "_id": "6557b3d6d36228ff8fddbeef",
+    "index": 1,
+    "guid": "f42f2b82-9640-4e44-8300-a9ff937c9a73",
+    "isActive": false,
+    "balance": "$2,349.01",
+    "picture": "http://placehold.it/32x32",
+    "age": 24,
+    "eyeColor": "green",
+    "name": "Mara Perry",
+    "gender": "female",
+    "company": "COREPAN",
+    "email": "maraperry@corepan.com",
+    "phone": "+1 (882) 574-2603",
+    "address": "241 Harrison Place, Oasis, Alabama, 8442",
+    "about": "Minim sit fugiat aute cillum irure laborum amet ipsum anim ea dolor magna. Irure ut Lorem aliqua ad laborum proident in magna voluptate velit amet esse ad. Velit est Lorem enim esse in ut aliquip fugiat. Non dolore fugiat consequat nostrud exercitation aliquip quis culpa nisi duis dolor sint pariatur veniam.\r\n",
+    "registered": "2016-07-10T04:01:02 +03:00",
+    "latitude": -67.399159,
+    "longitude": -40.421577,
+    "tags": [
+      "reprehenderit",
+      "enim",
+      "reprehenderit",
+      "adipisicing",
+      "anim",
+      "ut",
+      "ut"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Snider Greer"
+      },
+      {
+        "id": 1,
+        "name": "Kim Simon"
+      },
+      {
+        "id": 2,
+        "name": "Riddle Mcdonald"
+      }
+    ],
+    "greeting": "Hello, Mara Perry! You have 4 unread messages.",
+    "favoriteFruit": "apple"
+  },
+  {
+    "_id": "6557b3d6dd0aa3278adb48b6",
+    "index": 2,
+    "guid": "74a11e73-e0df-4696-9e94-9fc4755e1bc9",
+    "isActive": false,
+    "balance": "$3,398.77",
+    "picture": "http://placehold.it/32x32",
+    "age": 30,
+    "eyeColor": "blue",
+    "name": "Noelle Barker",
+    "gender": "female",
+    "company": "VIASIA",
+    "email": "noellebarker@viasia.com",
+    "phone": "+1 (865) 531-2580",
+    "address": "500 Clarkson Avenue, Fedora, Montana, 9745",
+    "about": "Laborum occaecat cillum aliquip magna velit enim. Nostrud elit proident occaecat labore consequat esse enim sint qui ullamco ad deserunt. Et eu mollit eiusmod enim minim aliquip officia veniam minim magna aliquip non. Voluptate culpa mollit enim consectetur pariatur adipisicing consequat. Velit ullamco sit ullamco sit. Id exercitation deserunt duis adipisicing proident.\r\n",
+    "registered": "2017-08-03T07:06:44 +03:00",
+    "latitude": 32.831917,
+    "longitude": 174.755276,
+    "tags": [
+      "tempor",
+      "irure",
+      "cupidatat",
+      "culpa",
+      "elit",
+      "anim",
+      "sit"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Janna Brennan"
+      },
+      {
+        "id": 1,
+        "name": "Aguilar Rojas"
+      },
+      {
+        "id": 2,
+        "name": "Joyce Guerrero"
+      }
+    ],
+    "greeting": "Hello, Noelle Barker! You have 5 unread messages.",
+    "favoriteFruit": "strawberry"
+  },
+  {
+    "_id": "6557b3d6a4de69f724408d37",
+    "index": 3,
+    "guid": "1fa4fb27-602a-4fac-80a5-834c1edc0539",
+    "isActive": false,
+    "balance": "$1,644.23",
+    "picture": "http://placehold.it/32x32",
+    "age": 40,
+    "eyeColor": "brown",
+    "name": "Fowler Kaufman",
+    "gender": "male",
+    "company": "ECSTASIA",
+    "email": "fowlerkaufman@ecstasia.com",
+    "phone": "+1 (873) 454-3915",
+    "address": "440 Tehama Street, Baker, District Of Columbia, 1124",
+    "about": "Minim id et incididunt aute non ipsum. Enim anim aute laboris aliquip deserunt ut deserunt anim ut incididunt labore exercitation. Officia consequat amet amet adipisicing amet irure anim qui dolore nostrud. Ea officia veniam occaecat consequat officia pariatur est minim aliqua ad incididunt ut. Enim dolore occaecat officia et quis eu labore velit non id.\r\n",
+    "registered": "2022-02-27T01:00:38 +03:00",
+    "latitude": 9.303427,
+    "longitude": -38.566165,
+    "tags": [
+      "non",
+      "deserunt",
+      "reprehenderit",
+      "consectetur",
+      "sit",
+      "quis",
+      "exercitation"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Hammond Rivera"
+      },
+      {
+        "id": 1,
+        "name": "Della Lindsey"
+      },
+      {
+        "id": 2,
+        "name": "Savage Garrett"
+      }
+    ],
+    "greeting": "Hello, Fowler Kaufman! You have 5 unread messages.",
+    "favoriteFruit": "strawberry"
+  },
+  {
+    "_id": "6557b3d6e5f9ddb9bcfd1f1c",
+    "index": 4,
+    "guid": "d95d6968-28b8-43be-8dd7-861804a70824",
+    "isActive": true,
+    "balance": "$3,167.37",
+    "picture": "http://placehold.it/32x32",
+    "age": 23,
+    "eyeColor": "blue",
+    "name": "Pate Head",
+    "gender": "male",
+    "company": "ISOSPHERE",
+    "email": "patehead@isosphere.com",
+    "phone": "+1 (844) 430-2448",
+    "address": "647 Malta Street, Whitehaven, Puerto Rico, 5206",
+    "about": "Incididunt ullamco fugiat Lorem veniam adipisicing cupidatat consectetur ad. Dolor do occaecat ad cupidatat elit labore exercitation exercitation quis id eiusmod sunt sint excepteur. Eu qui elit do sunt duis sit ex in cillum ad. Nulla exercitation irure laboris aliquip aliquip veniam minim ad culpa voluptate commodo dolore.\r\n",
+    "registered": "2016-01-31T10:37:48 +02:00",
+    "latitude": -58.661235,
+    "longitude": 32.699413,
+    "tags": [
+      "aliqua",
+      "aliqua",
+      "irure",
+      "occaecat",
+      "ex",
+      "consectetur",
+      "pariatur"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Mercado Giles"
+      },
+      {
+        "id": 1,
+        "name": "Warren Hammond"
+      },
+      {
+        "id": 2,
+        "name": "Byrd Landry"
+      }
+    ],
+    "greeting": "Hello, Pate Head! You have 4 unread messages.",
+    "favoriteFruit": "banana"
+  }
+]
