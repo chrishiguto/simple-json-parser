@@ -1,6 +1,5 @@
-use std::fs::File;
-use std::io::{BufReader, BufRead};
-use regex::Regex;
+use std::fs;
+use std::iter::Peekable;
 
 #[derive(Debug)]
 enum TokenType {
@@ -18,91 +17,112 @@ enum TokenType {
 }
 
 #[derive(Debug)]
-struct Token<'a> {
+struct Token {
     token_type: TokenType,
-    value: &'a str,
+    value: String,
+}
+
+#[derive(Debug)]
+struct Parser<I: Iterator<Item = char>> {
+    buffer: Peekable<I>,
+    tokens: Vec<Token>,
+    line: usize,
+    col: usize,
+}
+
+// Parser should:
+// 1. Tokenize
+// 2. Parse tokens
+impl<I: Iterator<Item = char>> Parser<I> {
+    pub fn new(buffer: Peekable<I>) -> Self {
+        Parser {
+            buffer,
+            tokens: Vec::new(),
+            line: 1,
+            col: 0,
+        }
+    }
+
+    pub fn parse(&mut self) {
+        self.tokenize();
+
+        println!("Tokens: {:?}", self.tokens);
+    }
+
+    // The `tokenize` function should go through the `buffer` iterator
+    // And build up the tokens.
+    fn tokenize(&mut self) {
+        // Every call to `self.next` will either return the char or None
+        // Based on the char we'll add the corresponding token to the array of tokens.
+
+        while let Some(char) = self.next() {
+            match char {
+                '{' => self.tokens.push(Token {
+                    token_type: TokenType::BraceOpen,
+                    value: "{".to_string(),
+                }),
+                '}' => self.tokens.push(Token {
+                    token_type: TokenType::BraceOpen,
+                    value: "}".to_string(),
+                }),
+                '[' => self.tokens.push(Token {
+                    token_type: TokenType::BracketOpen,
+                    value: "[".to_string(),
+                }),
+                ']' => self.tokens.push(Token {
+                    token_type: TokenType::BracketClose,
+                    value: "]".to_string(),
+                }),
+                '"' => {
+                    self.tokens.push(Token {
+                        token_type: TokenType::String,
+                        value: "]".to_string(),
+                    });
+
+                    let mut concatened_char = String::new();
+                    while let Some(char) = self.next() {
+                        if char == '"' {
+                            if concatened_char.len() > 0 {
+                                self.tokens.push(Token {
+                                    token_type: TokenType::String,
+                                    value: concatened_char.clone(),
+                                });
+                            }
+
+                            self.tokens.push(Token {
+                                token_type: TokenType::String,
+                                value: "]".to_string(),
+                            });
+
+                            break;
+                        }
+
+                        concatened_char.push(char)
+                    }
+                }
+                _ => println!("Char: {}", char),
+            }
+        }
+    }
+
+    fn next(&mut self) -> Option<char> {
+        while let Some(char) = self.buffer.next() {
+            return Some(char);
+        }
+
+        None
+    }
 }
 
 fn main() {
-    println!("Im running!");
-
-    let file = match File::open("file.json") {
+    let file = match fs::read_to_string("file.json") {
         Ok(file) => file,
         Err(e) => {
             println!("Error while reading the file. {}", e);
             std::process::exit(1);
-        },
+        }
     };
 
-    let reader = BufReader::new(file);
-
-    let mut tokens: Vec<Token> = Vec::new();
-    
-    for line in reader.lines() {
-        let read_line = match line {
-            Ok(line) => line,
-            Err(e) => {
-                println!("Error while reading the line.");
-                std::process::exit(1);
-            },
-        };
- 
-        let decimal_regex = Regex::new(r"[\d\w]").unwrap();
-        let mut concatened_str = String::new();
-
-        // TODO: this is probably inneficient
-        for byte in read_line.chars() {
-            match byte {
-                '{' => tokens.push(Token {
-                        token_type: TokenType::BraceOpen,
-                        value: "{",
-                    }),
-                '}' => tokens.push(Token {
-                        token_type: TokenType::BraceClose,
-                        value: "}",
-                    }),
-                '[' => tokens.push(Token {
-                        token_type: TokenType::BracketOpen,
-                        value: "[",
-                    }),
-                ']' => tokens.push(Token {
-                        token_type: TokenType::BracketClose,
-                        value: "]",
-                    }),
-                ':' => tokens.push(Token {
-                        token_type: TokenType::Colon,
-                        value: ":",
-                    }),
-                ',' => tokens.push(Token {
-                        token_type: TokenType::Comma,
-                        value: ",",
-                    }),
-                '"' => {
-                    if concatened_str.len() > 0 {
-                        let new_str = String::from(concatened_str);
-
-                        tokens.push(Token {
-                            token_type: TokenType::String,
-                            value: &new_str[..], 
-                        });
-
-                        concatened_str = String::new();
-                    };
-
-                    tokens.push(Token {
-                        token_type: TokenType::Comma,
-                        value: ",",
-                    }) 
-                },
-                _ => {
-                    if decimal_regex.is_match(&byte.to_string()[..]) {
-                        concatened_str.push(byte);
-                    }
-                },
-            }   
-        }
-    }
-
-    println!("Tokens: {:?}", tokens);
+    let mut parser = Parser::new(file.chars().peekable());
+    parser.parse();
 }
-
