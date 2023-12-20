@@ -2,24 +2,18 @@ use std::fs;
 use std::iter::Peekable;
 
 #[derive(Debug)]
-enum TokenType {
+enum Token {
     BraceOpen,
     BraceClose,
     BracketOpen,
     BracketClose,
-    String,
+    String(String),
     Number,
     Comma,
     Colon,
     True,
     False,
     Null,
-}
-
-#[derive(Debug)]
-struct Token {
-    token_type: TokenType,
-    value: String,
 }
 
 #[derive(Debug)]
@@ -57,43 +51,17 @@ impl<I: Iterator<Item = char>> Parser<I> {
 
         while let Some(char) = self.next() {
             match char {
-                '{' => self.tokens.push(Token {
-                    token_type: TokenType::BraceOpen,
-                    value: "{".to_string(),
-                }),
-                '}' => self.tokens.push(Token {
-                    token_type: TokenType::BraceOpen,
-                    value: "}".to_string(),
-                }),
-                '[' => self.tokens.push(Token {
-                    token_type: TokenType::BracketOpen,
-                    value: "[".to_string(),
-                }),
-                ']' => self.tokens.push(Token {
-                    token_type: TokenType::BracketClose,
-                    value: "]".to_string(),
-                }),
+                '{' => self.tokens.push(Token::BraceOpen),
+                '}' => self.tokens.push(Token::BraceClose),
+                '[' => self.tokens.push(Token::BracketOpen),
+                ']' => self.tokens.push(Token::BracketClose),
                 '"' => {
-                    self.tokens.push(Token {
-                        token_type: TokenType::String,
-                        value: "]".to_string(),
-                    });
-
                     let mut concatened_char = String::new();
                     while let Some(char) = self.next() {
                         if char == '"' {
                             if concatened_char.len() > 0 {
-                                self.tokens.push(Token {
-                                    token_type: TokenType::String,
-                                    value: concatened_char.clone(),
-                                });
+                                self.tokens.push(Token::String(concatened_char.clone()));
                             }
-
-                            self.tokens.push(Token {
-                                token_type: TokenType::String,
-                                value: "]".to_string(),
-                            });
-
                             break;
                         }
 
