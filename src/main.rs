@@ -111,8 +111,6 @@ impl<I: Iterator<Item = char>> Parser<I> {
     }
 
     fn lex_object(&mut self) -> Option<Token> {
-        println!("Oi");
-
         match self.consume() {
             Ok('{') => Some(Token::BraceOpen),
             Ok('}') => Some(Token::BraceClose),
@@ -121,7 +119,6 @@ impl<I: Iterator<Item = char>> Parser<I> {
     }
 
     fn lex_array(&mut self) -> Option<Token> {
-        println!("Oi");
         match self.consume() {
             Ok('[') => Some(Token::BracketOpen),
             Ok(']') => Some(Token::BraceClose),
