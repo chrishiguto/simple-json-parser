@@ -122,11 +122,7 @@ impl<I: Iterator<Item = char>> Parser<I> {
         match self.consume() {
             Ok('[') => Some(Token::BracketOpen),
             Ok(']') => Some(Token::BraceClose),
-            cj => {
-                println!("Hey: {:?}", cj);
-
-                None
-            }
+            _ => None,
         }
     }
 
