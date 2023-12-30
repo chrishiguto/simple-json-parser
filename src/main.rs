@@ -1,3 +1,4 @@
+use std::error::Error;
 use std::fs;
 use std::iter::Peekable;
 
@@ -11,8 +12,7 @@ enum Token {
     Number(f64),
     Comma,
     Colon,
-    True,
-    False,
+    Boolean(bool),
     Null,
 }
 
@@ -58,19 +58,41 @@ impl<I: Iterator<Item = char>> Parser<I> {
         let concatened_char = self.lex_constant("null");
 
         match concatened_char {
-            true => Some(Token::Null),
-            false => None,
+            Some(&_) => Some(Token::Null),
+            None => None,
         }
     }
 
     fn lex_number(&mut self) -> Option<Token> {
-        // Check for negative
+        let mut concatened_char = String::new();
 
-        // Check for numbers
+        if let Some('-') = self.buffer.peek() {
+            concatened_char.push('-');
+            let _ = self.consume();
+        }
 
-        // Check for dot
+        match self.buffer.peek() {
+            Some('0'..='9') => {
+                while let Some(number @ '0'..='9') = self.buffer.next() {
+                    concatened_char.push(number);
+                }
+            }
+            _ => (),
+        }
 
-        let concatened_char = "10";
+        if let Some('.') = self.buffer.peek() {
+            concatened_char.push('.');
+            let _ = self.consume();
+
+            match self.buffer.peek() {
+                Some('0'..='9') => {
+                    while let Some(number @ '0'..='9') = self.buffer.next() {
+                        concatened_char.push(number);
+                    }
+                }
+                _ => (),
+            }
+        }
 
         match concatened_char.parse() {
             Ok(num) => Some(Token::Number(num)),
@@ -82,8 +104,8 @@ impl<I: Iterator<Item = char>> Parser<I> {
         let concatened_char = self.lex_constant("true");
 
         match concatened_char {
-            true => Some(Token::True),
-            false => None,
+            Some(&_) => Some(Token::Boolean(true)),
+            None => None,
         }
     }
 
@@ -91,23 +113,23 @@ impl<I: Iterator<Item = char>> Parser<I> {
         let concatened_char = self.lex_constant("false");
 
         match concatened_char {
-            true => Some(Token::False),
-            false => None,
+            Some(&_) => Some(Token::Boolean(false)),
+            None => None,
         }
     }
 
-    fn lex_constant(&mut self, constant: &str) -> bool {
+    fn lex_constant(&mut self, constant: &'static str) -> Option<&str> {
         for char in constant.chars() {
             if let Some(buf_char) = self.buffer.next() {
                 if char == buf_char {
                     continue;
                 }
 
-                return false;
+                return Some(constant);
             };
         }
 
-        true
+        None
     }
 
     fn lex_object(&mut self) -> Option<Token> {
@@ -121,7 +143,7 @@ impl<I: Iterator<Item = char>> Parser<I> {
     fn lex_array(&mut self) -> Option<Token> {
         match self.consume() {
             Ok('[') => Some(Token::BracketOpen),
-            Ok(']') => Some(Token::BraceClose),
+            Ok(']') => Some(Token::BracketClose),
             _ => None,
         }
     }
@@ -143,11 +165,16 @@ impl<I: Iterator<Item = char>> Parser<I> {
                 '[' | ']' => self.lex_array(),
                 ',' | ':' => self.lex_delimiters(),
                 '"' => self.lex_string(),
-                // '0'..='9' | '-' => self.lex_number(),
+                '0'..='9' | '-' => self.lex_number(),
                 't' => self.lex_true(),
                 'f' => self.lex_false(),
                 'n' => self.lex_null(),
                 c => {
+                    if c.is_whitespace() {
+                        let _ = self.consume();
+                        continue;
+                    }
+
                     println!("Invalid character {c}");
 
                     if let Ok(_) = self.consume() {
@@ -176,15 +203,11 @@ impl<I: Iterator<Item = char>> Parser<I> {
     }
 }
 
-fn main() {
-    let file = match fs::read_to_string("file.json") {
-        Ok(file) => file,
-        Err(e) => {
-            println!("Error while reading the file. {}", e);
-            std::process::exit(1);
-        }
-    };
+fn main() -> Result<(), Box<dyn Error>> {
+    let file = fs::read_to_string("file.json")?;
 
     let mut parser = Parser::new(file.chars().peekable());
     parser.parse();
+
+    Ok(())
 }
